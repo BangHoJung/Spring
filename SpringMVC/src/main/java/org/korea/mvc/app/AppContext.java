@@ -2,6 +2,7 @@ package org.korea.mvc.app;
 
 import org.korea.mvc.dao.EmployeeDAO;
 import org.korea.mvc.dao.MemberDAO;
+import org.korea.mvc.dao.StudentDAO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,5 +24,10 @@ public class AppContext {
 	@Bean
 	public EmployeeDAO getEmployee() {
 		return new EmployeeDAO(getManager());
+	}
+	
+	@Bean
+	public StudentDAO getStudent() {
+		return new StudentDAO(getManager());
 	}
 }
