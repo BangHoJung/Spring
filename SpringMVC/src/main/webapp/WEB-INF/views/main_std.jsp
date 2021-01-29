@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach var="std" items="${sessionScope.list }">
+	<c:forEach var="std" items="${requestScope.list }">
 		<p>${std.sno } , ${std.name } , ${std.major } , ${std.score }</p>
 	</c:forEach>
 </body>

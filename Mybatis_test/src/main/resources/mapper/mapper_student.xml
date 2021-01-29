@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.mapper.StudentMapper">
+	<select id="searchAllStudent" resultType="com.db.dto.StudentDTO">
+		SELECT * FROM student
+	</select>
+	
+	<insert id="insertStudent" parameterType="com.db.dto.StudentDTO">
+		INSERT INTO student VALUES(#{sno},#{name},#{major},#{score})
+	</insert>
+	
+	<update id="updateStudent" parameterType="com.db.dto.StudentDTO">
+		UPDATE student SET name=#{name}, major=#{major},score=#{score} WHERE sno=#{sno}
+	</update>
+	
+	<delete id="deleteStudent" parameterType="String">
+		DELETE FROM student WHERE sno=#{sno}
+	</delete>
+</mapper>

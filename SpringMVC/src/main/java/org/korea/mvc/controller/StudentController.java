@@ -2,7 +2,7 @@ package org.korea.mvc.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.korea.mvc.dto.StudentDTO;
 import org.korea.mvc.service.StudentService;
@@ -19,20 +19,17 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/main_std")
-	public String MainStudent(HttpSession session) {
+	public String MainStudent(HttpServletRequest request) {
+		searchAllStudentController(request);
+		return null;
+	}
+	
+	@RequestMapping("/search_all_student.do")
+	public String searchAllStudentController(HttpServletRequest request) {
 		System.out.println("searchAllStudent");
 		String result="";
 		ArrayList<StudentDTO> list =  service.searchAllStudent();
-		session.setAttribute("list", list);
+		request.setAttribute("list", list);
 		return "main_std";
 	}
-	
-//	@RequestMapping("/search_all_student.do")
-//	public String searchAllStudentController(HttpSession session) {
-//		System.out.println("searchAllStudent");
-//		String result="";
-//		ArrayList<StudentDTO> list =  service.searchAllStudent();
-//		session.setAttribute("list", list);
-//		return "main_std";
-//	}
 }

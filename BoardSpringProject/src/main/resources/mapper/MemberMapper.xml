@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board.mapper.MemberMapper">
+	<select id="loginMember" parameterType="HashMap" resultType="board.vo.MemberVO">
+		SELECT id,pass,name,age,grade_name FROM member NATURAL JOIN grade_list WHERE id=#{id} AND pass=#{pass}
+	</select>
+	<select id="memberManageSearch" parameterType="Map" resultType="board.vo.MemberVO">
+		SELECT 
+	</select>
+  	
+<!--   	-<select parameterType="Map" id="manageSearchMember" resultType="vo.MemberVO">
+SELECT m.id,m.pass,m.name,m.age,g.grade_name FROM MEMBER m , grade_list g WHERE m.grade = g.grade AND 
+
+-<choose>
+
+<when test="kind == 'id'">m.id LIKE '%'||#{search}||'%' ORDER BY m.id ASC </when>
+
+<when test="kind == 'name'">m.name LIKE '%'||#{search}||'%' ORDER BY m.name ASC </when>
+<otherwise>g.grade_name LIKE '%'||#{search}||'%' ORDER BY g.grade_name ASC </otherwise>
+</choose>
+</select> -->
+
+</mapper>
