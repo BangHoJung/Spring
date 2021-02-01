@@ -4,22 +4,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board.mapper.MemberMapper">
 	<select id="loginMember" parameterType="HashMap" resultType="board.vo.MemberVO">
-		SELECT id,pass,name,age,grade_name FROM member NATURAL JOIN grade_list WHERE id=#{id} AND pass=#{pass}
+		SELECT m.*,g.grade_name FROM member m,  grade_list g WHERE m.grade = g.grade AND id=#{id} AND pass=#{pass}
+	</select>
+	<select id="searchMember" parameterType="String" resultType="board.vo.MemberVO">
+		SELECT * FROM member WHERE id=#{id}
 	</select>
 	<select id="memberManageSearch" parameterType="Map" resultType="board.vo.MemberVO">
-		SELECT 
+		SELECT m.*,g.grade_name FROM member m, grade_list g WHERE m.grade = g.grade AND
+		<choose>
+			<when test="kind == 'id'">id LIKE '%'||#{search}||'%' ORDER BY id ASC </when>
+			<when test="kind == 'name'">name LIKE '%'||#{search}||'%' ORDER BY name ASC </when>
+			<otherwise>grade = #{search} ORDER BY grade ASC </otherwise>
+		</choose>
 	</select>
-  	
-<!--   	-<select parameterType="Map" id="manageSearchMember" resultType="vo.MemberVO">
-SELECT m.id,m.pass,m.name,m.age,g.grade_name FROM MEMBER m , grade_list g WHERE m.grade = g.grade AND 
-
--<choose>
-
-<when test="kind == 'id'">m.id LIKE '%'||#{search}||'%' ORDER BY m.id ASC </when>
-
-<when test="kind == 'name'">m.name LIKE '%'||#{search}||'%' ORDER BY m.name ASC </when>
-<otherwise>g.grade_name LIKE '%'||#{search}||'%' ORDER BY g.grade_name ASC </otherwise>
-</choose>
-</select> -->
+	
+	<insert id="insertLog" parameterType="HashMap">
+		INSERT INTO memberLog VALUES(TO_DATE(#{log_date},'YYYY-MM-DD HH24:MI:SS'), #{code_number}, #{message})
+	</insert>
+	
+	<update id="updateMember" parameterType="HashMap">
+		UPDATE member SET pass = #{pass}, name = #{name}, age = #{age} WHERE id = #{id}
+	</update>
+	<update id="memberManageUpdate" parameterType="board.vo.MemberVO">
+		UPDATE member SET name = #{name} , age = #{age} , grade = #{grade} WHERE id = #{id}
+	</update>
+	
+	<delete id="memberManageDelete" parameterType="String">
+		DELETE FROM member WHERE id = #{id}
+	</delete>
 
 </mapper>

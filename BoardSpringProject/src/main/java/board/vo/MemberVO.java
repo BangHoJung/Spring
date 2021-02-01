@@ -8,17 +8,47 @@ public class MemberVO {
 	private String pass;
 	private String name;
 	private int age;
-	private String grade;
-
-
-	public MemberVO(String id, String pass, String name, int age, String grade) {
+	private int grade;
+	private String grade_name;
+	
+	public MemberVO(String id, String pass, String name, int age, int grade, String grade_name) {
 		super();
 		this.id = id;
 		this.pass = pass;
 		this.name = name;
 		this.age = age;
 		this.grade = grade;
+		this.grade_name = grade_name;
 	}
+	
+	public MemberVO(String id, String pass, String name, int age, int grade) {
+		super();
+		this.id = id;
+		this.pass = pass;
+		this.name = name;
+		this.age = age;
+		this.grade = grade;
+		this.grade_name = "default";
+	}
+
+
+
+	public String getGrade_name() {
+		return grade_name;
+	}
+
+	public void setGrade_name(String grade_name) {
+		this.grade_name = grade_name;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	
+	public int getGrade() {
+		return grade;
+	}
+
 
 	public String getId() {
 		return id;
@@ -52,18 +82,7 @@ public class MemberVO {
 		this.age = age;
 	}
 	
-	public String getGrade() {
-		return grade;
-	}
 
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
-	
-	@Override
-	public String toString() {
-		return "[id="+id+", pass="+pass+", name="+name+", age="+age+", grade="+grade+"]";
-	}
 
 	
 }

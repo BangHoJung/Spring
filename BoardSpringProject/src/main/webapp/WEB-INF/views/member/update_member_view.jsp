@@ -44,7 +44,7 @@
 				변경할 비밀번호 : <input type="password" name="pass"><br>
 				변경할 이름 : <input type="text" name="name" value="${requestScope.vo.name }"><br>
 				변경할 나이 : <input type="text" name="age" value="${requestScope.vo.age }"><br>
-				<button type="submit">제출</button>
+				<button type="submit">정보수정</button> <a href="javascript:history.back();" type="button">뒤로가기</a>
 			</form>
 		</nav>
 		

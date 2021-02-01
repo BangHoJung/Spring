@@ -12,6 +12,15 @@ public interface MemberMapper {
 
 	MemberVO loginMember(HashMap<String, Object> map);
 
-	List<MemberVO> memberManageSearch(HashMap<String, Object> map);
+	MemberVO searchMember(String id);
+
+	int updateMember(HashMap<String, Object> map);
 	
+	List<MemberVO> memberManageSearch(HashMap<String, Object> map);
+
+	int memberManageUpdate(MemberVO memberVO);
+
+	int memberManageDelete(String id);
+
+	int insertLog(HashMap<String, Object> map);
 }

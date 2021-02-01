@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <style type="text/css">
 	* {
 		margin:0;
@@ -37,8 +35,8 @@
 				아이디 : <input type="text" name="id">  <br>
 				암호 : <input type="password" name="pass"> <br>
 				<button type="submit">로그인</button>
-				<a href="" type="button">회원가입</a>
-				<a href="" type="button" >비밀번호 찾기</a>
+				<a href="register_view.do" type="button">회원가입</a>
+				<a href="#none" type="button" >비밀번호 찾기</a>
 			</form>
 		</nav>
 		

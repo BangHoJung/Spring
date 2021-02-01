@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/lib/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 
 	$(document).on("click",".update",function() {
@@ -21,13 +21,12 @@
 			data : data,
 			method : 'get',
 			success : function result(data) {
-				if(data.indexOf("true")!=-1) {
-					$("#search")[0].reset();
-					$("#btn_submit").click();
-				}
-				else {
-					alert("업데이트에 실패 했습니다");
-				}
+				$("#search")[0].reset();
+				$("#btn_submit").click();
+			},
+			error : function error(xhr, status, error) {
+				$("#btn_submit").click();
+				error_alert(xhr.status);
 			}
 		});
 	});
@@ -40,14 +39,13 @@
 			data : data,
 			method : 'get',
 			success : function result(data) {
-				alert(data);
-				if(data.indexOf("true")!=-1) {
-					$("#search")[0].reset();
-					$("#btn_submit").click();
-				}
-				else {
-					alert("업데이트에 실패 했습니다");
-				}
+				$("#search")[0].reset();
+				$("#btn_submit").click();
+			},
+			error : function error(xhr, status, error) {
+				$("#btn_submit").click();
+				error_alert(xhr.status);
+				
 			}
 		});
 	});
@@ -72,7 +70,7 @@
 						result += "<td><input type='text' value='"+json.result[i].name+"' name='name'></td>";
 						result += "<td><input type='text' value='"+json.result[i].age+"' name='age'></td>";
 						result += "<td><input type='text' value='"+json.result[i].grade+"' name='grade'></td>";
-						result += "<td><a href='#' class='update' >수정</a> / <a href='#' class='delete' >삭제</a></td> </tr>";
+						result += "<td><a href='#none' class='update' >수정</a> / <a href='#none' class='delete' >삭제</a></td> </tr>";
 					}
 					result += "</table>";
 					$("#content_area").html(result);
@@ -92,7 +90,23 @@
 		});
 		
 		$("#btn_submit").click();
+		
+		
 	});
+	
+	//에러 exception에 대해 alert 해주는 호출 메소드
+	function error_alert(status) {
+		switch(status) {
+		case 500 :
+			alert("SQL ERROR");
+			break;
+		case 1000 :
+			alert("SERVICE ERROR");
+			break;
+		default :
+			alert(status);
+		}
+	}
 
 	
 </script>
