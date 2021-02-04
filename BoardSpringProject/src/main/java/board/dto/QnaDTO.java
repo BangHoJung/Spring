@@ -1,5 +1,8 @@
 package board.dto;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("qna")
 public class QnaDTO {
 	private int qid;
 	private String title;

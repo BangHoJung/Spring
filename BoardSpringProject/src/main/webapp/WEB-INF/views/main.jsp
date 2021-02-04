@@ -11,9 +11,8 @@
 	$(function() {
 		$("tbody tr").click(function() {
 			var bno = $(this).children().eq(0).html();
-			console.log("${param.currPage} , bno : "+bno);
-			location.href = "board_view.do?currPage=${param.currPage}&bno="+bno;
-			
+			console.log("${requestScope.currPage} , bno : "+bno);
+			location.href = "board_view.do?bno="+bno;
 		});
 		
 	});
@@ -133,11 +132,17 @@
 </style>
 </head>
 <body>
-	<%-- <c:if test="${requestScope.board_list eq null or requestScope.board_list.size == 0 }">
+	<!-- or requestScope.board_list.size == 0 -->
+	<c:if test="${not empty requestScope.bno  }">
 		<script type="text/javascript">
-			location.href="main.do";
+			location.href="board_view.do?bno=${requestScope.bno}";
 		</script>
-	</c:if> --%>
+	</c:if>
+	<c:if test="${requestScope.board_list eq null  }">
+		<script type="text/javascript">
+			location.href="main.do?currPage=1&sort=bno";
+		</script>
+	</c:if>
 	
 	<div id="container">
 		<jsp:include page="template/header.jsp" flush="false"></jsp:include>
@@ -150,7 +155,6 @@
 			<a href="#" class="btn">검색</a>
 		</div>
 		<nav>
-			<!-- 
 			<table>
 				<thead>
 					<tr>
@@ -186,28 +190,26 @@
 					<tr>
 						<td colspan="7">
 							<c:if test="${requestScope.pageVO.prevPageGroup }">
-								<a href="main.do?currPage=${requestScope.pageVO.startPageOfPageGroup-1 }&sort=${param.sort}">◀</a>
+								<a href="main.do?currPage=${requestScope.pageVO.startPageOfPageGroup-1 }&sort=${requestScope.sort}">◀</a>
 							</c:if>
 							<c:forEach var="index" begin="${requestScope.pageVO.startPageOfPageGroup}" end="${requestScope.pageVO.endPageOfPageGroup}">
 								<c:choose>
-									<c:when test="${index == param.currPage}">
+									<c:when test="${index == requestScope.currPage}">
 										<a href="#" id="page_select">${index}</a>
 									</c:when>
 									<c:otherwise>
-										<a href="main.do?currPage=${index}&sort=${param.sort}">${index}</a>
+										<a href="main.do?currPage=${index}&sort=${requestScope.sort}">${index}</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 							<c:if test="${requestScope.pageVO.nextPageGroup}">
-								<a href="main.do?currPage=${requestScope.pageVO.endPageOfPageGroup+1}&sort=${param.sort}">▶</a>
+								<a href="main.do?currPage=${requestScope.pageVO.endPageOfPageGroup+1}&sort=${requestScope.sort}">▶</a>
 							</c:if>
 							<span><a href="write_board_view.do" class="btn">글쓰기</a></span>
-							
 						</td>
 					</tr>
 				</tfoot>
 			</table>
-			 -->
 		</nav>
 		
 		<jsp:include page="template/footer.jsp" flush="false"></jsp:include>

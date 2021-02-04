@@ -51,14 +51,6 @@
 </head>
 <body>
 	
-	<%-- <%
-		String param = "";
-		if(request.getQueryString()!=null) {
-			param += "?"+request.getQueryString();
-		}
-		session.setAttribute("last", request.getRequestURI()+param);
-		System.out.print(session.getAttribute("last")+"\n");
-	%> --%>
 	<div id="container">
 		<jsp:include page="../template/header.jsp" flush="false"></jsp:include>
 		
@@ -94,7 +86,7 @@
 			</div> 
 			<hr>
 			<div id="qna_form">
-				<form action="<%=request.getContextPath() %>/update_qna_response.do" method="post">
+				<form action="update_qna_response.do" method="post">
 					<table>
 						<tr>
 							<td>
@@ -102,6 +94,7 @@
 								<textarea name="response">${requestScope.dto.response}</textarea>
 							</td>
 							<td><button type="submit">답변 등록</button></td>
+							<td><a href="qna_view.do">목록으로</a></td>
 						</tr>
 					</table>
 					

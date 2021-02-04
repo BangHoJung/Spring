@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board.mapper.QnaMapper">
+	<select id="searchQnaList" parameterType="HashMap" resultType="qna">
+		SELECT qid,title,content,writer,qdate,status,response FROM ( SELECT q.*,ROWNUM rn FROM (SELECT * FROM qna 
+		<choose>
+			<when test="grade_name == 'master'">
+				ORDER BY status asc, qid desc) q) 
+			</when>
+			<otherwise>
+				WHERE writer = #{writer} ORDER BY qid desc) q) 
+			</otherwise>
+		</choose>
+		WHERE CEIL(rn/5)=#{nextPage}
+		
+	</select>
+	<select id="searchQnaDTO" parameterType="int" resultType="qna">
+		SELECT * FROM qna WHERE qid=#{qid}
+	</select>
+	
+	<insert id="insertQnaDTO" parameterType="qna">
+		INSERT INTO qna(qid,title,content,writer) VALUES(SEQ_QID.NEXTVAL,#{title},#{content},#{writer})
+	</insert>
+	
+	<update id="updateQnaStatus" parameterType="HashMap">
+		UPDATE qna SET status = #{status} WHERE qid=#{qid}
+	</update>
+	<update id="updateQnaResponse">
+		 UPDATE qna SET response = #{answer} WHERE qid=#{qid}
+	</update>
+</mapper>

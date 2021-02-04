@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import board.dto.QnaDTO;
 import board.mapper.MemberMapper;
 import board.vo.MemberVO;
 
@@ -54,12 +55,12 @@ public class MemberService {
 		return mapper.memberManageDelete(id);
 	}
 
-	public void insertLog(String log_date, String code_number, String message) {
+	public int insertLog(String log_date,int code_number, String message) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("log_date", log_date);
 		map.put("code_number", code_number);
 		map.put("message", message);
-		int count =  mapper.insertLog(map);
+		return mapper.insertLog(map);
 		
 	}
 	

@@ -2,6 +2,9 @@ package board.dto;
 
 import java.io.File;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("file")
 public class FileDTO {
 	private int bno;
 	private String path;
@@ -16,12 +19,16 @@ public class FileDTO {
 		this.writer = writer;
 		this.fileName = file.getName();
 		//error.png 
-		switch(fileName.substring(fileName.lastIndexOf(".")+1)) {
+		switch(fileName.substring(fileName.lastIndexOf(".")+1).toLowerCase()) {
 		case "png":
 		case "bmp":
 		case "jpg":
 		case "gif":
 			type="image";
+			break;
+		case "mp4":
+		case "mkv":
+			type="video";
 			break;
 		default:
 			type="normal";
@@ -34,12 +41,16 @@ public class FileDTO {
 		this.path = path;
 		this.writer = writer;
 		this.fileName = path.substring(path.lastIndexOf("\\")+1);
-		switch(fileName.substring(fileName.lastIndexOf(".")+1)) {
+		switch(fileName.substring(fileName.lastIndexOf(".")+1).toLowerCase()) {
 		case "png":
 		case "bmp":
 		case "jpg":
 		case "gif":
 			type="image";
+			break;
+		case "mp4":
+		case "mkv":
+			type="video";
 			break;
 		default:
 			type="normal";

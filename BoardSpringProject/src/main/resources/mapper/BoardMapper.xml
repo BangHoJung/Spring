@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board.mapper.BoardMapper">
+	<select parameterType="Map" id="searchAllBoardDTO" resultType="board">
+		SELECT bs.bno,bs.title,bs.bdate,bs.bcount,bs.writer,bs.content,bs.blike,bs.bhate FROM (SELECT rs.*,ROWNUM rn FROM (SELECT * FROM BOARD ORDER BY 
+		<choose>
+			<when test="sort == 'bno'">bno</when>
+			<when test="sort == 'bcount'">bcount</when>
+			<when test="sort == 'blike'">blike</when>
+			<otherwise>bhate</otherwise>
+		</choose>
+		 DESC) rs) bs WHERE CEIL(rn/#{page}) = #{currPage} 
+	</select>
+	<select id="countAllBoard" resultType="int">SELECT COUNT(*) FROM board </select>
+	<select id="countAllComment" resultType="map">SELECT bno,COUNT(*) cnt FROM board_comment GROUP BY bno </select>
+	<select id="searchBoardDTO" parameterType="int" resultType="board" >
+		SELECT * FROM board WHERE bno = #{bno}
+	</select>
+	<select id="searchAllCommentDTO" parameterType="int" resultType="comment">
+		 SELECT * FROM board_comment WHERE bno = #{bno} ORDER BY cno DESC
+	</select>
+	<select id="searchSortCommentDTO" parameterType="HashMap" resultType="comment">
+		SELECT * FROM board_comment WHERE bno = #{bno} ORDER BY 
+		<choose>
+			<when test="sort == 'cdate'">cdate</when>
+			<when test="sort == 'clike'">clike</when>
+			<otherwise>chate</otherwise>
+		</choose>
+		 DESC, cno DESC
+	</select>
+	<select id="searchFileList" parameterType="HashMap" resultType="file">
+		SELECT * FROM board_file_list WHERE bno=#{bno} AND writer = #{writer}
+	</select>
+	<select id="searchLikeCount" parameterType="int" resultType="int">
+		SELECT blike FROM board WHERE bno = #{bno}
+	</select>
+	<select id="searchHateCount" parameterType="int" resultType="int">
+		SELECT bhate FROM board WHERE bno = #{bno}
+	</select>
+	<select id="searchCommentLikeCount" parameterType="int" resultType="int">
+		SELECT clike FROM board_comment WHERE cno = #{cno}
+	</select>
+	<select id="searchCommentHateCount" parameterType="int" resultType="int">
+		SELECT chate FROM board_comment WHERE cno = #{cno}
+	</select>
+	<select id="nextBno" resultType="int">
+		SELECT SEQ_BNO.NEXTVAL FROM DUAL
+	</select>
+	<select id="prevBoardDTO" parameterType="int" resultType="board">
+		SELECT bno,title,bdate,bcount,writer,content,blike,bhate FROM( SELECT ROWNUM rbrn, rb.* FROM 
+		(SELECT * FROM board ORDER BY bno) rb) WHERE rbrn = ( SELECT rn FROM(SELECT ROWNUM rn, b.* FROM 
+		(SELECT * FROM board ORDER BY bno) b ) WHERE bno=#{bno} )+1
+	</select>
+	<select id="nextBoardDTO" parameterType="int" resultType="board">
+		SELECT bno,title,bdate,bcount,writer,content,blike,bhate FROM( SELECT ROWNUM rbrn, rb.* FROM 
+		(SELECT * FROM board ORDER BY bno) rb) WHERE rbrn = ( SELECT rn FROM(SELECT ROWNUM rn, b.* FROM 
+		(SELECT * FROM board ORDER BY bno) b ) WHERE bno=#{bno} )-1
+	</select>
+	
+	
+	<insert id="insertBoardComment" parameterType="comment">
+		INSERT INTO board_comment(cno,bno,content,writer) VALUES(SEQ_CNO.NEXTVAL,#{bno},#{content},#{writer})
+	</insert>
+	<insert id="insertBoardDTO" parameterType="board">
+		INSERT INTO board(bno,title,writer,content) VALUES(#{bno},#{title},#{writer},#{content})
+	</insert>
+	<insert id="insertFileList" parameterType="file">
+		 INSERT INTO board_file_list VALUES(#{bno},#{writer},#{path}) 
+	</insert>
+	
+	
+	<update id="addBoardCount" parameterType="int">
+		UPDATE board SET bcount = bcount + 1 WHERE bno = #{bno}
+	</update>
+	<update id="addLikeBoardDTO" parameterType="int">
+		UPDATE board SET blike = blike + 1 WHERE bno = #{bno}
+	</update>
+	<update id="addHateBoardDTO" parameterType="int">
+		UPDATE board SET bhate = bhate + 1 WHERE bno = #{bno}
+	</update>
+	<update id="addLikeCommentDTO" parameterType="int">
+		UPDATE board_comment SET clike = clike + 1 WHERE cno = #{cno}
+	</update>
+	<update id="addHateCommentDTO" parameterType="int">
+		UPDATE board_comment SET chate = chate + 1 WHERE cno = #{cno}
+	</update>
+</mapper>

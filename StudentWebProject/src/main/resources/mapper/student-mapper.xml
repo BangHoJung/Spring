@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="student.mapper.StudentMapper">
+	<select id="searchAllStudent" parameterType="HashMap" resultType="student.dto.StudentDTO">
+		SELECT * FROM student WHERE 
+		<choose>
+			<when test="kind == 'sno'">sno LIKE '%'||#{search}||'%' ORDER BY sno ASC </when>
+			<when test="kind == 'name'">name LIKE '%'||#{search}||'%' ORDER BY name ASC </when>
+			<otherwise>major LIKE '%'||#{search}||'%' ORDER BY major ASC </otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insertLog" parameterType="HashMap">
+		INSERT INTO student_log VALUES(TO_DATE(#{log_date},'YYYY-MM-DD HH24:MI:SS'), #{error_code}, #{content})
+	</insert>
+</mapper>

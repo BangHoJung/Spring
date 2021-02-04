@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import board.dto.QnaDTO;
 import board.vo.MemberVO;
 
 @Mapper
@@ -23,4 +24,5 @@ public interface MemberMapper {
 	int memberManageDelete(String id);
 
 	int insertLog(HashMap<String, Object> map);
+
 }

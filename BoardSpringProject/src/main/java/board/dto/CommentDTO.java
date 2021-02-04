@@ -1,5 +1,8 @@
 package board.dto;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("comment")
 public class CommentDTO {
 	private int cno;
 	private int bno;

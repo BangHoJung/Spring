@@ -211,9 +211,7 @@
 					
 				</div>
 			</div>
-			
 		</nav>
-		
 		<jsp:include page="../template/footer.jsp" flush="false"></jsp:include>
 		
 	</div>

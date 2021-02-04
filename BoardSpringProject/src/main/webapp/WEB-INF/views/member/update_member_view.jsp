@@ -31,7 +31,7 @@
 	<c:if test="${sessionScope.login == null or sessionScope.login == false }">
 		<script>
 			alert("로그인 세션이 만료되었습니다.");
-			location.href="main.do";
+			location.href="main.do?currPage=1&sort=bno";
 		</script>
 	</c:if>
 	

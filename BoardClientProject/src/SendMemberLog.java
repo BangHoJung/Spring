@@ -49,6 +49,7 @@ public class SendMemberLog {
 			URL url;
 			url = new URL(apiUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
