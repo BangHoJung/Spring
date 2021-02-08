@@ -1,0 +1,2 @@
+2021/02/05 11:21:51	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/05 12:06:28	500	XX99	Internal Server Error

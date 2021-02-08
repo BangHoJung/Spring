@@ -1,0 +1,33 @@
+2021/02/05 02:21:18	500	XX99	Internal Server Error
+2021/02/05 02:23:03	500	XX99	Internal Server Error
+2021/02/05 02:23:51	500	XX99	Internal Server Error
+2021/02/05 02:26:31	500	XX99	Internal Server Error
+2021/02/05 02:27:45	500	XX99	Internal Server Error
+2021/02/05 02:28:14	500	XX99	Internal Server Error
+2021/02/05 02:28:52	500	XX99	Internal Server Error
+2021/02/05 02:29:26	500	XX99	Internal Server Error
+2021/02/05 02:32:20	500	XX99	Internal Server Error
+2021/02/05 02:33:40	500	XX99	Internal Server Error
+2021/02/05 02:36:05	500	XX99	Internal Server Error
+2021/02/05 02:40:15	500	XX99	Internal Server Error
+2021/02/05 03:33:53	400	N2MT05	source and target must be different (source와 target이 동일합니다.)
+2021/02/05 03:36:49	400	N2MT05	source and target must be different (source와 target이 동일합니다.)
+2021/02/05 03:37:11	400	N2MT05	source and target must be different (source와 target이 동일합니다.)
+2021/02/08 10:48:12	400	N2MT05	source and target must be different (source와 target이 동일합니다.)
+2021/02/08 10:53:28	400	N2MT05	source and target must be different (source와 target이 동일합니다.)
+2021/02/08 10:53:37	400	N2MT05	source and target must be different (source와 target이 동일합니다.)
+2021/02/08 10:53:48	400	N2MT05	source and target must be different (source와 target이 동일합니다.)
+2021/02/08 10:54:24	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 10:56:24	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 10:56:38	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 10:57:36	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 10:58:24	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 11:18:34	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 11:18:58	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 11:25:43	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 11:33:20	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 11:33:33	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 11:33:46	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 11:34:25	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 11:34:29	400	N2MT04	Unsupported target language (지원하지 않는 target 언어입니다.)
+2021/02/08 11:39:59	400	N2MT05	source and target must be different (source와 target이 동일합니다.)
