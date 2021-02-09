@@ -7,9 +7,21 @@
 <title>Insert title here</title>
 <script src="lib/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+	var start = 1;
+	var total = 2;
+	var search = "";
 	$(function() {
+		$("#search").keydown(function(key) {
+            if (key.keyCode == 13) {
+            	$("#btn_search").click();
+            }
+        });
+
 		$("#btn_search").click( function() {
-			var data = "search="+$("#search").val();
+			if(search != $("#search").val()) {
+				start = 1;
+			}
+			var data = "search="+$("#search").val()+"&start="+start;
 			$.ajax({
 				url : "search_book.do",
 				data : data,
@@ -19,19 +31,38 @@
 					console.log(json);
 					var arr = json.resultArr;
 					console.log(arr);
+					total = json.total;
+					search = $("#search").val();
 					var str = "";
 					for(i=0;i<arr.length;i++) {
-						str += "<div><img src='"+arr[i].image+"'>";
+						str += "<div id='book'><img src='"+arr[i].image+"'>";
 						str += "<span><a href='"+arr[i].link+"'><h3>"+arr[i].title +"</h3></a>";
 						str += "저자 : "+arr[i].author + " , 출판사 : "+arr[i].publisher+"<br>";
 						str += "<p>"+arr[i].description+"</p></span></div>";
 					}
+					str += "<div id='page'><br><a href='#' id='prev'>이전페이지</a> "+Math.round(1+start/10)+" <a href='#' id='next'>다음페이지</a></div>";
 					$("article").html(str);
+					if(start == 1) $("#prev").css("visibility","hidden");
+					if(start + 10 > total) $("#next").css("visibility","hidden");
 				}
 			});
 		});
 		
 	});
+	
+	$(document).on("click","#prev",function() {
+		start = start - 10;
+		page = page - 1;
+		$("#btn_search").click();
+	});
+	
+	$(document).on("click","#next",function() {
+		start = start + 10;
+		page = page + 1;
+		$("#btn_search").click();
+	});
+	
+	
 </script>
 <style type="text/css">
 	* {
@@ -72,7 +103,7 @@
 		line-height: 15px;
 		
 	}
-	article div {
+	article #book {
 		margin:15px 0px;
 		display: inline-block;
 		position: static;
@@ -107,6 +138,17 @@
 	}
 	article a:hover {
 		color:blue;
+	}
+	article #page {
+		margin:0 auto;
+		font-size: 30px;
+		text-align: center;
+		margin-bottom:30px;
+	}
+	
+	article #page a {
+		margin: 0px 20px;
+		font-size:20px;
 	}
 </style>
 </head>
