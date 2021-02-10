@@ -16,7 +16,7 @@ public class WeatherTestMain {
 		// TODO Auto-generated method stub
 		String serviceKey,pageNo,numOfRows,dataType,baseDate,baseTime,nx,ny;
 		serviceKey = "Iu2FcMrXODOm6ILvnOSYSEVxtdhLg3xIqgpJtRmdE6b02EoyADD2wB2Apdyw0xMFy4uY4bYeAe1sLkxIRZC%2F5w%3D%3D";
-		nx = "59"; ny = "126";
+		nx = args[3]; ny = args[4];
 		int time = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Calendar cal = Calendar.getInstance();
@@ -68,17 +68,17 @@ public class WeatherTestMain {
         }
         rd.close();
         conn.disconnect();
-        System.out.println(sb.toString());
+//        System.out.println(sb.toString());
         JSONObject json = new JSONObject(sb.toString());
         JSONObject items = json.getJSONObject("response").getJSONObject("body").getJSONObject("items");
         JSONArray item = new JSONArray(items.getJSONArray("item"));
-        System.out.println(items.toString());
+//        System.out.println(items.toString());
         String result = "",fTime="",fDate="",TMN="",TMX="";
         for(i=0;i<item.length();i++) {
         	if(!fDate.equals(item.getJSONObject(i).getString("fcstDate"))) {
         		System.out.println(result+"\n");
         		fDate = item.getJSONObject(i).getString("fcstDate");
-        		System.out.println(fDate+" 날씨정보");
+        		System.out.println(fDate+" "+args[0]+" "+args[1]+" "+args[2]+" 날씨정보");
         	}
         	String category = item.getJSONObject(i).getString("category");
         	if(!fTime.equals(item.getJSONObject(i).getString("fcstTime"))) {
@@ -101,6 +101,10 @@ public class WeatherTestMain {
         	}
         }
         System.out.println(result);
+	}
+	
+	public static void weather(String nx, String ny) {
+		
 	}
 
 }

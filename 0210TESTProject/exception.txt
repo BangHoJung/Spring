@@ -1,0 +1,3 @@
+2021/02/10 02:29:25	400	SE01	Incorrect query request (잘못된 쿼리요청입니다.)
+2021/02/10 02:33:14	400	SE01	Incorrect query request (잘못된 쿼리요청입니다.)
+2021/02/10 02:47:36	401	024	Not Exist Client ID : Authentication failed. (인증에 실패했습니다.)
